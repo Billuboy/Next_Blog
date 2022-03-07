@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@components/*": ["components/*"],
+      "@lib/*": ["lib/*"],
+      "@hooks/*": ["hooks/*"]
+    }
   },
-  "include": ["pages"],
-  "exclude": ["node_modules", ".next"]
+  "include": ["pages", "components", "lib"],
+  "exclude": ["node_modules", ".next", ".vscode", "build"]
 }

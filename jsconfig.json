@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {}
+  },
+  "include": ["pages"],
+  "exclude": ["node_modules", ".next"]
+}

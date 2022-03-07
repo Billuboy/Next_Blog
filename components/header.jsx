@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <div>
-      <div>Header</div>
+      <Link href="/">Blogs</Link>
       {auth ? (
         <div role="button" onClick={logout} tabIndex="0">
           Logout

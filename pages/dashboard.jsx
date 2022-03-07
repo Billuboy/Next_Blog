@@ -1,30 +1,35 @@
 import React from 'react';
+import Image from 'next/image';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useRouter } from 'next/router';
 
-import { jsonParse } from '@lib/json';
-import { registerHandler } from '@lib/auth';
 import { useUser } from '@hooks/useUser';
+import { jsonStringify } from '@lib/json';
 
-export default function Register({ setAuthType }) {
-  const router = useRouter();
-  const { login } = useUser();
+export default function Dashboard() {
+  const { data, token, changeFullName } = useUser();
 
-  const onSubmit = async (data, { setErrors }) => {
-    try {
-      await registerHandler(data);
-      await login({ username: data.email, password: data.password });
-      router.replace('/');
-    } catch (err) {
-      setErrors(jsonParse(err.message));
-    }
+  const onSubmit = async (body, { setTouched, setFieldValue }) => {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
+      method: 'PUT',
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+      body: jsonStringify(body),
+    });
+    changeFullName(body.full_name);
+    setTouched({
+      full_name: false,
+      password: false,
+    });
+    setFieldValue('password', '');
   };
 
   const formik = useFormik({
     initialValues: {
-      full_name: '',
-      email: '',
+      full_name: data.fullName,
+      email: data.email,
       password: '',
     },
     validationSchema: Yup.object().shape({
@@ -33,9 +38,6 @@ export default function Register({ setAuthType }) {
         .max(50, 'Must be 3-50 characters long')
         .required('Full Name is required')
         .typeError('Full Name must be string'),
-      email: Yup.string()
-        .email('Must be a valid email')
-        .required('Email is required'),
       password: Yup.string()
         .min(8, 'Must be 8-30 characters long')
         .max(30, 'Must be between 8-30 characters long')
@@ -71,15 +73,11 @@ export default function Register({ setAuthType }) {
         <input
           id="email"
           type="email"
-          autoComplete="off"
-          placeholder="Email"
-          disabled={formik.isSubmitting}
+          readOnly
+          disabled
           {...formik.getFieldProps('email')}
         />
       </label>
-      {formik.touched.email && formik.errors.email ? (
-        <div>{formik.errors.email}</div>
-      ) : null}
 
       <label htmlFor="password">
         Password
@@ -97,23 +95,26 @@ export default function Register({ setAuthType }) {
       ) : null}
 
       <button type="submit" disabled={formik.isSubmitting}>
-        {formik.isSubmitting ? 'Loading...' : 'Sign-Up with credentials'}
+        {formik.isSubmitting ? 'Loading...' : 'Update User'}
       </button>
     </form>
   );
 
   return (
     <div>
-      <div>{renderForm()}</div>
+      <div>Dashboard</div>
       <div>
-        <div>
-          Already have an account?{' '}
-          <span role="button" onClick={() => setAuthType('login')} tabIndex="0">
-            Sign-In
-          </span>{' '}
-          to your account.
-        </div>
+        <Image
+          src={data.avatar}
+          width="200"
+          height="200"
+          layout="fixed"
+          priority
+        />
       </div>
+      {renderForm()}
     </div>
   );
 }
+
+Dashboard.auth = true;

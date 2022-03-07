@@ -33,6 +33,7 @@ const getData = async () => {
         email: userData.email,
         id: userData.id,
         fullName: userData.full_name,
+        avatar: `https://avatar.tobi.sh/${userData.email}`,
       },
       token,
     };
@@ -67,13 +68,17 @@ export default function User({ children }) {
     setUser({ auth: false, data: null, token: null });
   };
 
+  const changeFullName = (fullName) =>
+    setUser({ ...user, data: { ...user.data, fullName } });
+
   const value = useMemo(
     () => ({
       ...user,
       login,
       logout,
+      changeFullName,
     }),
-    []
+    [user]
   );
 
   if (loading) {

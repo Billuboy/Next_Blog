@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import BlogForm from '@components/blog/blogForm';
 import { useUser } from '@hooks/useUser';
 
 export default function Create() {
   const { token } = useUser();
+  const [isOpen, setIsOpen] = useState(true);
 
   const submitCallback = async (data) => {
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/items/`, {
@@ -20,7 +21,15 @@ export default function Create() {
   return (
     <div>
       <div>Create a blog</div>
-      <BlogForm submitCallback={submitCallback} buttonText="Create Blog" />
+      <button type="button" onClick={() => setIsOpen(true)}>
+        Open Dialog
+      </button>
+      <BlogForm
+        submitCallback={submitCallback}
+        buttonText="Create Blog"
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
     </div>
   );
 }

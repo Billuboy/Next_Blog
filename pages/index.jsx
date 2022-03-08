@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import useSWR from 'swr';
 
 import { useUser } from '@hooks/useUser';
+import BlogModal from '@components/blog/blogForm';
 import SmallBlog from '@components/blog/smallBlog';
 import fetcher from '@lib/blog';
 import LandingBigBlog from '@components/blog/landingBlog/bigBlog';
 import LandingSmallBlog from '@components/blog/landingBlog/smallBlog';
 
 export default function Index() {
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+  const globalData = useRef(null);
   const { token, data: user } = useUser();
   const fetchURL = `${process.env.NEXT_PUBLIC_API_URL}/items/`;
 
@@ -39,6 +43,8 @@ export default function Index() {
           deleteBlog={deleteBlog}
           id={val.id}
           user={user}
+          globalData={globalData}
+          setOpen={setIsUpdateOpen}
         />
       </div>
     ));
@@ -54,6 +60,8 @@ export default function Index() {
           id={data[0].id}
           deleteBlog={deleteBlog}
           user={user}
+          globalData={globalData}
+          setOpen={setIsUpdateOpen}
         />
       </div>
       <div className="w-[600px] flex flex-col justify-between">
@@ -64,6 +72,8 @@ export default function Index() {
           id={data[1].id}
           deleteBlog={deleteBlog}
           user={user}
+          globalData={globalData}
+          setOpen={setIsUpdateOpen}
         />
         <LandingSmallBlog
           title={data[2].title}
@@ -72,6 +82,8 @@ export default function Index() {
           id={data[2].id}
           deleteBlog={deleteBlog}
           user={user}
+          globalData={globalData}
+          setOpen={setIsUpdateOpen}
         />
       </div>
     </div>
@@ -80,11 +92,38 @@ export default function Index() {
   if (!data && !error) {
     return <div>Loading...</div>;
   }
-
+  console.log('globalData', globalData.current);
   return (
     <div>
-      <h2 className="font-bold text-[24px] mt-[2rem]">LATEST BLOGS</h2>
-      <div className="border-[3px] border-solid border-purple-500 w-[1000px] mb-[2rem]" />
+      <div className="flex justify-between">
+        <div>
+          <h2 className="font-bold text-[24px] mt-[2rem]">LATEST BLOGS</h2>
+          <div className="border-[3px] border-solid border-purple-500 w-[1000px] mb-[2rem]" />
+        </div>
+        <div className="w-[160px] h-[40px] bg-purple-500 rounded-[5px] grid place-items-center mt-[1.5rem]">
+          <button
+            type="button"
+            className="font-semibold text-[18px]"
+            onClick={() => setIsCreateOpen(true)}
+          >
+            Create a Blog
+          </button>
+        </div>
+      </div>
+      <BlogModal
+        buttonText="Create Blog"
+        isOpen={isCreateOpen}
+        setIsOpen={setIsCreateOpen}
+      />
+      {globalData && (
+        <BlogModal
+          buttonText="Update Blog"
+          globalData={globalData.current}
+          isOpen={isUpdateOpen}
+          setIsOpen={setIsUpdateOpen}
+        />
+      )}
+
       <div>{renderLandingBlogs()}</div>
       <div className="grid grid-cols-3 justify-items-center gap-x-[110px] gap-y-[4rem] mt-[4rem]">
         {renderSmallBlogs()}

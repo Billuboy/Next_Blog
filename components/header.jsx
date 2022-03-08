@@ -36,16 +36,6 @@ export default function Header() {
             </>
           </Menu.Item>
           <Menu.Item>
-            {/* {({ active }) => ( */}
-            <>
-              <p className="font-regular text-[1.2rem] cursor-pointer">
-                Create a Blog
-              </p>
-              <div className="border-b-gray-200 border-b-solid border-b w-full" />
-            </>
-            {/* // )} */}
-          </Menu.Item>
-          <Menu.Item>
             <Link href="/dashboard">
               <p className="font-regular text-[1.2rem] cursor-pointer">
                 Settings

@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 export default function SmallBlog({
@@ -10,8 +9,13 @@ export default function SmallBlog({
   deleteBlog,
   user,
   image,
+  setOpen,
+  setGlobalData,
 }) {
-  const router = useRouter();
+  const handleEdit = async () => {
+    setGlobalData({ title, description, id });
+    setOpen(true);
+  };
 
   return (
     <div className="w-[400px] h-[400px] border border-solid border-gray-200 rounded-[5px] grid place-items-center">
@@ -47,7 +51,7 @@ export default function SmallBlog({
           <div className="flex justify-end gap-[1rem] mt-[0.5rem]">
             <button
               type="button"
-              onClick={() => router.push(`/blogs/update/${id}`)}
+              onClick={() => handleEdit()}
               className="button-edit"
             >
               Edit

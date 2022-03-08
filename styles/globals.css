@@ -61,3 +61,19 @@
 .header-auth {
   @apply text-center font-bold text-[30px] text-purple-500 mb-[3rem];
 }
+
+.modal-blog-title {
+  @apply block font-medium w-full p-[0.5rem] border border-solid border-purple-500 rounded-[5px] text-[16px] focus:outline-none;
+}
+
+.modal-blog-title-error {
+  @apply block font-medium w-full p-[0.5rem] border border-solid border-red-danger rounded-[5px] text-[16px] focus:outline-none;
+}
+
+.modal-field-label {
+  @apply block font-semibold text-[20px] mt-[1.5rem];
+}
+
+.modal-field-label p {
+  @apply mb-[0.25rem];
+}

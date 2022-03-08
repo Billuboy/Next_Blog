@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
-const Login = dynamic(() => import('@components/auth/login'), {
-  loading: () => <p>Loading...</p>,
-});
+const Login = dynamic(() => import('@components/auth/login'));
 
-const Register = dynamic(() => import('@components/auth/register'), {
-  loading: () => <p>Loading...</p>,
-});
+const Register = dynamic(() => import('@components/auth/register'));
 
 export default function Auth() {
-  const [authType, setAuthType] = useState('register');
+  const [authType, setAuthType] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => setAuthType(router.query.type), [router.query.type]);
 
   return (
     <>
@@ -19,7 +19,7 @@ export default function Auth() {
         <title>Auth</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      {authType === 'login' ? (
+      {authType === 'sign-in' ? (
         <Login setAuthType={setAuthType} />
       ) : (
         <Register setAuthType={setAuthType} />

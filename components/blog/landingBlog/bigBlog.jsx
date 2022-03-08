@@ -8,31 +8,29 @@ export default function SmallBlog({
   description,
   id,
   deleteBlog,
-  user,
   image,
+  user,
 }) {
   const router = useRouter();
 
   return (
-    <div className="w-[400px] h-[400px] border border-solid border-gray-200 rounded-[5px] grid place-items-center">
-      <div className="w-[360px] h-[360px]">
-        <div className="flex gap-[20px]">
-          <Image
-            src={image}
-            width="120"
-            height="120"
-            layout="fixed"
-            priority
-            className="rounded-[5px]"
-          />
-          <div className="h-[120px] w-[210px] text-title">
-            <Link href={`/blogs/${id}`}>{title}</Link>
-          </div>
+    <div className="h-[232px] w-[537px] flex gap-[30px]">
+      <div className="w-[232px]">
+        <Image
+          src={image}
+          width="232"
+          height="232"
+          layout="fixed"
+          priority
+          className="rounded-[5px]"
+        />
+      </div>
+      <div className="w-[275px]">
+        <div className="text-title mb-[1rem]">
+          <Link href={`/blogs/${id}`}>{title}</Link>
         </div>
-        <div className="h-[130px] mt-[1rem] text-description">
-          {description}
-        </div>
-        <div className="mt-[2rem]">
+        <div className="text-description h-[100px]">{description}</div>
+        <div className="mt-[1rem]">
           <div className="flex items-center">
             <Image
               src={user.avatar}

@@ -9,19 +9,23 @@ function MyApp({ Component, pageProps }) {
   return (
     <UserProvider>
       <Header />
-      {Component.auth ? (
-        <AuthGuard>
-          <Component {...pageProps} />
-        </AuthGuard>
-      ) : null}
-      {Component.login ? (
-        <LoginGuard>
-          <Component {...pageProps} />
-        </LoginGuard>
-      ) : null}
-      {!Component.auth && !Component.login ? (
-        <Component {...pageProps} />
-      ) : null}
+      <div className="w-full flex justify-center">
+        <div className="min-h-[calc(100vh-72px)] w-[1437px]">
+          {Component.auth ? (
+            <AuthGuard>
+              <Component {...pageProps} />
+            </AuthGuard>
+          ) : null}
+          {Component.login ? (
+            <LoginGuard>
+              <Component {...pageProps} />
+            </LoginGuard>
+          ) : null}
+          {!Component.auth && !Component.login ? (
+            <Component {...pageProps} />
+          ) : null}
+        </div>
+      </div>
     </UserProvider>
   );
 }

@@ -1,0 +1,69 @@
+import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+
+export default function SmallBlog({
+  title,
+  description,
+  id,
+  deleteBlog,
+  image,
+  user,
+}) {
+  const router = useRouter();
+
+  return (
+    <div className="container-landing-small">
+      <div className="w-[572px] h-[110px] flex gap-[30px]">
+        <div className="w-[110px]">
+          <Image
+            src={image}
+            width="110"
+            height="110"
+            layout="fixed"
+            priority
+            className="rounded-[5px]"
+          />
+        </div>
+        <div className="w-[432px]">
+          <div className="text-title h-[27px]">
+            <Link href={`/blzogs/${id}`}>{title}</Link>
+          </div>
+          <div className="text-description h-[46px] line-clamp-2 truncate">
+            {description}
+          </div>
+          <div className="flex justify-between">
+            <div className="flex items-center">
+              <Image
+                src={user.avatar}
+                width="30"
+                height="30"
+                layout="fixed"
+                priority
+                className="rounded-full"
+              />
+              <p className="text-author">{user.fullName}</p>
+            </div>
+            <div className="flex gap-[1rem]">
+              <button
+                type="button"
+                onClick={() => router.push(`/blogs/update/${id}`)}
+                className="button-edit"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                onClick={() => deleteBlog(id)}
+                className="button-delete"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,3 +1,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.button-auth {
+  @apply h-[30px] w-[100px] font-bold text-[14px] grid place-items-center rounded-[5px];
+}
+
+.button-edit {
+  @apply h-[18px] w-[80px] font-bold text-[12px] grid place-items-center rounded-[5px] border-2 border-solid border-purple-500;
+}
+
+.button-delete {
+  @apply h-[18px] w-[80px] font-bold text-[12px] grid place-items-center rounded-[5px] border-2 border-solid border-red-danger;
+}
+
+.text-title {
+  @apply font-semibold text-[18px];
+}
+
+.text-description {
+  @apply font-normal text-[14px] whitespace-pre truncate;
+}
+
+.text-author {
+  @apply font-bold text-[12px] ml-[0.75rem];
+}
+
+.container-landing-small {
+  @apply w-[600px] h-[130px] border border-solid border-gray-200 rounded-[5px] grid place-items-center;
+}
+
+.label-auth {
+  @apply w-[374px] h-[50px] border border-solid border-purple-500 block mt-[2rem] rounded-[5px] flex;
+}
+
+.label-auth-error {
+  @apply w-[374px] h-[50px] border border-solid border-red-danger block mt-[2rem] rounded-[5px] flex;
+}
+
+.input-auth {
+  @apply w-[326px] h-[48px] text-[20px] font-semibold p-[1rem] focus:outline-none;
+}
+
+.icon-auth {
+  @apply w-[48px] h-[48px] font-bold text-white-basic bg-purple-500 grid place-items-center;
+}
+
+.button-auth-form {
+  @apply bg-purple-500 text-white-basic w-[200px] h-[32px]  mt-[2rem] mb-[3rem] rounded-[5px] font-semibold text-[20px];
+}
+
+.container-error {
+  @apply h-[20px];
+}
+
+.text-error {
+  @apply font-semibold text-red-danger;
+}
+
+.header-auth {
+  @apply text-center font-bold text-[30px] text-purple-500 mb-[3rem];
+}

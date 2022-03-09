@@ -9,15 +9,8 @@ export default function SmallBlog({
   deleteBlog,
   image,
   user,
-  setOpen,
-  globalData,
+  handleUpdateSubmit,
 }) {
-  const handleEdit = () => {
-    // eslint-disable-next-line no-param-reassign
-    globalData.current = { title, description, id };
-    setOpen(true);
-  };
-
   return (
     <div className="h-[232px] w-[537px] flex gap-[30px]">
       <div className="w-[232px]">
@@ -50,7 +43,7 @@ export default function SmallBlog({
           <div className="flex justify-end gap-[1rem] mt-[0.5rem]">
             <button
               type="button"
-              onClick={() => handleEdit()}
+              onClick={() => handleUpdateSubmit({ title, description, id })}
               className="button-edit"
             >
               Edit

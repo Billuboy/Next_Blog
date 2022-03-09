@@ -1,7 +1,7 @@
 import React from 'react';
-import Image from 'next/image';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { UserIcon, AtSymbolIcon, KeyIcon } from '@heroicons/react/outline';
 
 import { useUser } from '@hooks/useUser';
 import { jsonStringify } from '@lib/json';
@@ -50,70 +50,94 @@ export default function Dashboard() {
   const renderForm = () => (
     <form
       onSubmit={formik.handleSubmit}
-      className="form border-2 border-gray-100 border-solid p-8 rounded-2xl shadow-xl"
+      className="form border-2 border-gray-100 border-solid p-8 rounded-2xl shadow-xl w-[562px] h-[576px] flex justify-center"
     >
-      <h4>Register</h4>
-      <label htmlFor="fullName">
-        Full Name
-        <input
-          id="fullName"
-          type="text"
-          autoComplete="off"
-          placeholder="Full Name"
-          disabled={formik.isSubmitting}
-          {...formik.getFieldProps('full_name')}
-        />
-      </label>
-      {formik.touched.full_name && formik.errors.full_name ? (
-        <div>{formik.errors.full_name}</div>
-      ) : null}
+      <div>
+        <h4 className="header-auth">Dashboard</h4>
+        <label
+          htmlFor="fullName"
+          className={
+            formik.touched.full_name && formik.errors.full_name
+              ? 'label-auth-error'
+              : 'label-auth'
+          }
+        >
+          <div className="icon-auth">
+            <UserIcon className="w-[20px] h-[24px]" />
+          </div>
+          <input
+            id="fullName"
+            type="text"
+            autoComplete="off"
+            placeholder="Full Name"
+            className="input-auth"
+            disabled={formik.isSubmitting}
+            {...formik.getFieldProps('full_name')}
+          />
+        </label>
+        <div className="container-error">
+          {formik.touched.full_name && formik.errors.full_name ? (
+            <p className="text-error">{formik.errors.full_name}</p>
+          ) : null}
+        </div>
 
-      <label htmlFor="email">
-        Email
-        <input
-          id="email"
-          type="email"
-          readOnly
-          disabled
-          {...formik.getFieldProps('email')}
-        />
-      </label>
+        <label htmlFor="email" className="label-auth cursor-not-allowed">
+          <div className="icon-auth">
+            <AtSymbolIcon className="w-[20px] h-[24px]" />
+          </div>
+          <input
+            id="email"
+            type="email"
+            readOnly
+            disabled
+            className="input-auth cursor-not-allowed"
+            {...formik.getFieldProps('email')}
+          />
+        </label>
+        <div className="container-error" />
 
-      <label htmlFor="password">
-        Password
-        <input
-          id="password"
-          type="password"
-          autoComplete="off"
-          placeholder="Password"
-          disabled={formik.isSubmitting}
-          {...formik.getFieldProps('password')}
-        />
-      </label>
-      {formik.touched.password && formik.errors.password ? (
-        <div>{formik.errors.password}</div>
-      ) : null}
+        <label
+          htmlFor="password"
+          className={
+            formik.touched.password && formik.errors.password
+              ? 'label-auth-error'
+              : 'label-auth'
+          }
+        >
+          <div className="icon-auth">
+            <KeyIcon className="w-[20px] h-[20px]" />
+          </div>
+          <input
+            id="password"
+            type="password"
+            autoComplete="off"
+            placeholder="Password"
+            className="input-auth"
+            disabled={formik.isSubmitting}
+            {...formik.getFieldProps('password')}
+          />
+        </label>
+        <div className="container-error">
+          {formik.touched.password && formik.errors.password ? (
+            <p className="text-error">{formik.errors.password}</p>
+          ) : null}
+        </div>
 
-      <button type="submit" disabled={formik.isSubmitting}>
-        {formik.isSubmitting ? 'Loading...' : 'Update User'}
-      </button>
+        <div className="flex justify-center mt-[1rem]">
+          <button
+            type="submit"
+            disabled={formik.isSubmitting}
+            className="button-auth-form"
+          >
+            {formik.isSubmitting ? 'Updating...' : 'Update'}
+          </button>
+        </div>
+      </div>
     </form>
   );
 
   return (
-    <div>
-      <div>Dashboard</div>
-      <div>
-        <Image
-          src={data.avatar}
-          width="200"
-          height="200"
-          layout="fixed"
-          priority
-        />
-      </div>
-      {renderForm()}
-    </div>
+    <div className="w-full h-full grid place-items-center">{renderForm()}</div>
   );
 }
 

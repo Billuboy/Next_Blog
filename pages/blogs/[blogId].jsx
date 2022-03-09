@@ -7,7 +7,7 @@ import BigBlog from '@components/blog/bigBlog';
 import fetcher from '@lib/blog';
 
 export default function Blog() {
-  const { token } = useUser();
+  const { token, data: user } = useUser();
   const router = useRouter();
 
   const fetchURL = `${process.env.NEXT_PUBLIC_API_URL}/items/${router.query.blogId}`;
@@ -22,8 +22,15 @@ export default function Blog() {
   }
 
   return (
-    <div>
-      {!error && <BigBlog title={data.title} description={data.description} />}
+    <div className="h-full">
+      {!error && (
+        <BigBlog
+          title={data.title}
+          description={data.description}
+          image={`https://avatar.tobi.sh/${data.title}`}
+          user={user}
+        />
+      )}
     </div>
   );
 }

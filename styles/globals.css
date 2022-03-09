@@ -39,7 +39,7 @@
 }
 
 .input-auth {
-  @apply w-[326px] h-[48px] text-[20px] font-semibold p-[1rem] focus:outline-none;
+  @apply w-[326px] h-[48px] text-[20px] font-semibold p-[1rem] focus:outline-none rounded-[5px];
 }
 
 .icon-auth {

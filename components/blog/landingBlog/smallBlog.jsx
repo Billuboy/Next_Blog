@@ -9,15 +9,8 @@ export default function SmallBlog({
   deleteBlog,
   image,
   user,
-  setOpen,
-  globalData,
+  handleUpdateSubmit,
 }) {
-  const handleEdit = () => {
-    // eslint-disable-next-line no-param-reassign
-    globalData.current = { title, description, id };
-    setOpen(true);
-  };
-
   return (
     <div className="container-landing-small">
       <div className="w-[572px] h-[110px] flex gap-[30px]">
@@ -33,7 +26,7 @@ export default function SmallBlog({
         </div>
         <div className="w-[432px]">
           <div className="text-title h-[27px]">
-            <Link href={`/blzogs/${id}`}>{title}</Link>
+            <Link href={`/blogs/${id}`}>{title}</Link>
           </div>
           <div className="text-description h-[46px] line-clamp-2 truncate">
             {description}
@@ -53,7 +46,7 @@ export default function SmallBlog({
             <div className="flex gap-[1rem]">
               <button
                 type="button"
-                onClick={() => handleEdit()}
+                onClick={() => handleUpdateSubmit({ title, description, id })}
                 className="button-edit"
               >
                 Edit

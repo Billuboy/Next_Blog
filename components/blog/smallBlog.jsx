@@ -9,14 +9,8 @@ export default function SmallBlog({
   deleteBlog,
   user,
   image,
-  setOpen,
-  setGlobalData,
+  handleUpdateSubmit,
 }) {
-  const handleEdit = async () => {
-    setGlobalData({ title, description, id });
-    setOpen(true);
-  };
-
   return (
     <div className="w-[400px] h-[400px] border border-solid border-gray-200 rounded-[5px] grid place-items-center">
       <div className="w-[360px] h-[360px]">
@@ -51,7 +45,7 @@ export default function SmallBlog({
           <div className="flex justify-end gap-[1rem] mt-[0.5rem]">
             <button
               type="button"
-              onClick={() => handleEdit()}
+              onClick={() => handleUpdateSubmit({ title, description, id })}
               className="button-edit"
             >
               Edit

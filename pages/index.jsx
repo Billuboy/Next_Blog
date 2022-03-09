@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import useSWR from 'swr';
 
 import { useUser } from '@hooks/useUser';
@@ -11,7 +11,7 @@ import LandingSmallBlog from '@components/blog/landingBlog/smallBlog';
 export default function Index() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const globalData = useRef(null);
+  const [globalData, setGlobalData] = useState(null);
   const { token, data: user } = useUser();
   const fetchURL = `${process.env.NEXT_PUBLIC_API_URL}/items/`;
 
@@ -32,6 +32,11 @@ export default function Index() {
     mutate(result);
   };
 
+  const handleUpdateSubmit = (postData) => {
+    setGlobalData(postData);
+    setIsUpdateOpen(true);
+  };
+
   const renderSmallBlogs = () => {
     const remain = data.slice(3);
     return remain.map((val) => (
@@ -43,8 +48,7 @@ export default function Index() {
           deleteBlog={deleteBlog}
           id={val.id}
           user={user}
-          globalData={globalData}
-          setOpen={setIsUpdateOpen}
+          handleUpdateSubmit={handleUpdateSubmit}
         />
       </div>
     ));
@@ -60,8 +64,7 @@ export default function Index() {
           id={data[0].id}
           deleteBlog={deleteBlog}
           user={user}
-          globalData={globalData}
-          setOpen={setIsUpdateOpen}
+          handleUpdateSubmit={handleUpdateSubmit}
         />
       </div>
       <div className="w-[600px] flex flex-col justify-between">
@@ -72,8 +75,7 @@ export default function Index() {
           id={data[1].id}
           deleteBlog={deleteBlog}
           user={user}
-          globalData={globalData}
-          setOpen={setIsUpdateOpen}
+          handleUpdateSubmit={handleUpdateSubmit}
         />
         <LandingSmallBlog
           title={data[2].title}
@@ -82,8 +84,7 @@ export default function Index() {
           id={data[2].id}
           deleteBlog={deleteBlog}
           user={user}
-          globalData={globalData}
-          setOpen={setIsUpdateOpen}
+          handleUpdateSubmit={handleUpdateSubmit}
         />
       </div>
     </div>
@@ -92,7 +93,7 @@ export default function Index() {
   if (!data && !error) {
     return <div>Loading...</div>;
   }
-  console.log('globalData', globalData.current);
+
   return (
     <div>
       <div className="flex justify-between">
@@ -103,7 +104,7 @@ export default function Index() {
         <div className="w-[160px] h-[40px] bg-purple-500 rounded-[5px] grid place-items-center mt-[1.5rem]">
           <button
             type="button"
-            className="font-semibold text-[18px]"
+            className="font-semibold text-[18px] text-white-basic"
             onClick={() => setIsCreateOpen(true)}
           >
             Create a Blog
@@ -118,12 +119,12 @@ export default function Index() {
       {globalData && (
         <BlogModal
           buttonText="Update Blog"
-          globalData={globalData.current}
+          globalData={globalData}
           isOpen={isUpdateOpen}
           setIsOpen={setIsUpdateOpen}
+          setGlobalData={setGlobalData}
         />
       )}
-
       <div>{renderLandingBlogs()}</div>
       <div className="grid grid-cols-3 justify-items-center gap-x-[110px] gap-y-[4rem] mt-[4rem]">
         {renderSmallBlogs()}

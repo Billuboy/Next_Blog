@@ -36,11 +36,9 @@ export default function Header() {
             </>
           </Menu.Item>
           <Menu.Item>
-            <Link href="/dashboard">
-              <p className="font-regular text-[1.2rem] cursor-pointer">
-                Settings
-              </p>
-            </Link>
+            <p className="font-regular text-[1.2rem] cursor-pointer">
+              <Link href="/dashboard">Settings</Link>
+            </p>
           </Menu.Item>
           <Menu.Item>
             <>
@@ -71,7 +69,7 @@ export default function Header() {
             <div className="button-auth border border-solid border-purple-500">
               <Link href="/auth?type=sign-in">Sign-In</Link>
             </div>
-            <div className="button-auth bg-purple-500">
+            <div className="button-auth bg-purple-500 text-white-basic">
               <Link href="/auth?type=sign-up">Sign-Up</Link>
             </div>
           </div>

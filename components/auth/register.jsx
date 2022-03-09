@@ -7,7 +7,7 @@ import { UserIcon, AtSymbolIcon, KeyIcon } from '@heroicons/react/outline';
 import { registerHandler } from '@lib/auth';
 import { useUser } from '@hooks/useUser';
 
-export default function Register({ setAuthType }) {
+export default function Register() {
   const router = useRouter();
   const { login } = useUser();
 

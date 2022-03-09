@@ -11,6 +11,7 @@ export default function BlogForm({
   buttonText,
   isOpen,
   setIsOpen,
+  setGlobalData,
 }) {
   const onSubmit = async (data, { resetForm, setErrors }) => {
     try {
@@ -43,7 +44,10 @@ export default function BlogForm({
       as="div"
       className="fixed inset-0 z-10 overflow-y-scroll"
       open={isOpen}
-      onClose={() => setIsOpen(false)}
+      onClose={() => {
+        setIsOpen(false);
+        if (globalData) setGlobalData(null);
+      }}
     >
       <div className="grid place-items-center h-full">
         <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />

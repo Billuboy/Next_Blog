@@ -35,6 +35,7 @@ export default function Index() {
           'Content-Type': 'application/json',
         },
       });
+      mutate(result);
     } else mutate(data);
   };
 

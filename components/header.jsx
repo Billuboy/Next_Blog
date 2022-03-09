@@ -36,7 +36,7 @@ export default function Header() {
             </>
           </Menu.Item>
           <Menu.Item>
-            <p className="font-regular text-[1.2rem] cursor-pointer">
+            <p className="font-semibold text-[1.2rem] cursor-pointer">
               <Link href="/dashboard">Settings</Link>
             </p>
           </Menu.Item>

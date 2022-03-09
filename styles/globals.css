@@ -15,11 +15,11 @@
 }
 
 .text-title {
-  @apply font-semibold text-[18px];
+  @apply font-semibold text-[18px] line-clamp-2 leading-[1.8rem];
 }
 
 .text-description {
-  @apply font-normal text-[14px] whitespace-pre truncate;
+  @apply font-normal text-[14px] line-clamp-2;
 }
 
 .text-author {
@@ -31,11 +31,11 @@
 }
 
 .label-auth {
-  @apply w-[374px] h-[50px] border border-solid border-purple-500 block mt-[2rem] rounded-[5px] flex;
+  @apply w-[374px] h-[50px] border border-solid border-purple-500 mt-[2rem] rounded-[5px] flex;
 }
 
 .label-auth-error {
-  @apply w-[374px] h-[50px] border border-solid border-red-danger block mt-[2rem] rounded-[5px] flex;
+  @apply w-[374px] h-[50px] border border-solid border-red-danger mt-[2rem] rounded-[5px] flex;
 }
 
 .input-auth {

@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Dialog } from '@headlessui/react';
 
-import { jsonParse, jsonStringify } from '@lib/json';
+import { jsonParse } from '@lib/json';
 
 export default function BlogForm({
   submitCallback,
@@ -15,8 +15,10 @@ export default function BlogForm({
 }) {
   const onSubmit = async (data, { resetForm, setErrors }) => {
     try {
-      await submitCallback(jsonStringify(data));
+      if (globalData) await submitCallback({ ...data, id: globalData.id });
+      else await submitCallback(data);
       resetForm();
+      setIsOpen(false);
     } catch (err) {
       setErrors(jsonParse(err.message));
     }

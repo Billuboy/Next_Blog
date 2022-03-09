@@ -28,9 +28,9 @@ export default function bigBlog({ title, description, user, image }) {
             className="rounded-[5px]"
           />
         </div>
-        <div className="font-semibold text-[16px] whitespace-pre">
+        <pre className="font-medium text-[16px] whitespace-pre-line">
           {description}
-        </div>
+        </pre>
       </div>
       <div className="w-[300px] grid place-items-center border border-solid border-gray-300">
         <h3 className="font-semibold text-[20px]">Space For Ads</h3>

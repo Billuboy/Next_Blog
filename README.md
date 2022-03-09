@@ -1,34 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blogs
+_Blogs is a blogging website where a user can register itself and create, update and delete blogs._
 
-## Getting Started
+## A word about NEXTJS
+_NEXTJS is a framework on top of React, enabling a simple React app the power of_
+<br/>
+<br/>
+_**Serverless Functions** - Serverless Functions are APIs with the power to automatically scale-up and scale-down depending upon the traffic._
+<br/>
+_**Static Site Generation** - Static Site Generation is the process of generating some web pages at the time of building a project._
+<br/>
+_**Server Side Rendering** - Server Side Rendering is the process of generating some web pages beforehand, giving a good SEO profile for the web pages._
 
-First, run the development server:
+## A word about SWR
+_SWR is a smart fetching, caching and state management tool, SWR reduces the number of re-renders, providing a good UX._
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## TechStack Used
+<img src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg" alt="node" width="40" height="40"/>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Platform Requriements
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+1. Nodejs 16.13.2 LTS
+2. Postman(Desktop App) or ThunderClient(VS Code Extension) - For testing Serverless Functions
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Quick start
 
-## Learn More
+1. Clone this repository
+2. `npm install` or `yarn install` in the project root folder on local.
+3. Make a `.env.development` and put `NEXT_PUBLIC_API_URL=https://backend7.cloudsenz.click/api/v1` in it.
+4. `npm run dev` or `yarn dev` to start application in development mode and `npm run prod` and `yarn prod` to start application in production mode.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## NPM Packages Used
+1. **Create Next App** - For creating NEXT app barebones  
+2. **SWR** - Data Fetching and State Management tool
+3. **Next Connect** - For adding middleware support to serverless functions
+4. **Cookie** - For parsing and manipulating cookies
+5. **Formik** - For working with forms
+6. **Yup** - For data validation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Useful Links
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. **NEXTJS** - `https://nextjs.org`
+2. **SWR** - `https://swr.vercel.app`
